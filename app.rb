@@ -18,21 +18,21 @@ rsvps_table = DB.from(:rsvps)
 get "/" do
     puts "params: #{params}"
 
-    puts events_table.all
-    @events = events_table.all
+    puts events_table.all.to_a
+    @events = events_table.all.to_a
     view "events"
 end
 
 get "/events/:id" do
     puts "params: #{params}"
 
-    @event = events_table.where(id: params[:id]).first
+    @event = events_table.where(id: params[:id]).to_a[0]
     view "event"
 end
 
 get "/events/:id/rsvps/new" do
     puts "params: #{params}"
 
-    @event = events_table.where(id: params[:id]).first
+    @event = events_table.where(id: params[:id]).to_a[0]
     view "new_rsvp"
 end
